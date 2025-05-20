@@ -9,6 +9,30 @@ Similar to Week9's Finance problem set, I used Flask, a web framework written in
 information about new and existing users. The website is written in HTML and CSS, and javascript functions were created to
 allow for the 'Add Friend' as well as 'Accept' and 'Decline' buttons.
 
+## Getting Started  
+1. Clone or download the repository 
+```bash
+git clone <repository-url>
+cd finalproject
+```
+
+2. Install required packages
+```bash
+pip install -r requirements.txt
+```
+
+3. Initialise the database
+```bash
+python init_db.py
+```
+
+4. Run the application
+```bash
+flask run
+```
+
+## About Friend Finder
+
 The main page of my website, the Find Friends page, auto populates by retrieving information from 2 SQLite3 tables, namely a
 users_info table (which stores information about each user) as well as the friend_requests table. This allows a 'pending' button
 to show instead of the 'add friend' button to show for users which the current user has already sent a friend request to.
