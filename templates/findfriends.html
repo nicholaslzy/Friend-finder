@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Find friends
+{% endblock %}
+
+{% block head %}
+    <script>
+        function handleAddFriendClick(button) {
+            button.disabled = true; // Disable the button to prevent multiple clicks
+            button.textContent = 'Pending'; // Change the button text to 'Pending'
+
+            var friendId = button.getAttribute('data-friend-id');
+
+            // Send an AJAX POST request
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/findfriends', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // Handle success, optionally update UI further based on response
+                    } else {
+                        // Handle error, revert button state
+                        button.disabled = false;
+                        button.textContent = 'Add friend';
+                    }
+                }
+            };
+
+            // Send the request with the friend_id parameter
+            xhr.send('friend_id=' + encodeURIComponent(friendId));
+        }
+    </script>
+{% endblock %}
+
+{% block body %}
+{% endblock %}
+
+{% block main %}
+<h2>Find Friends</h2><br>
+<table class='container'>
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>School</th>
+        <th>Course</th>
+        <th>Action</th>
+    </tr>
+    {% for user in user_list %}
+        <tr>
+            <td>{{ user['name'] }}</td>
+            <td>{{ user['age'] }}</td>
+            <td>{{ user['gender'] }}</td>
+            <td>{{ user['school'] }}</td>
+            <td>{{ user['course'] }}</td>
+            <td>
+                {% if user['status'] == 'pending' %}
+                    <button class="btn btn-primary" type="button" disabled>Pending</button>
+                {% else %}
+                    <button class="btn btn-primary" type="button" data-friend-id="{{ user['user_id'] }}" onclick="handleAddFriendClick(this)">Add friend</button>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+<hr>
+{% endblock %}

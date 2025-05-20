@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Account
+{% endblock %}
+
+{% block main %}
+    <form action="/account" method="post">
+        <input autocomplete="off" name="password" placeholder="Password" type="password">
+        <input autocomplete="off" name="newpassword" placeholder="New Password" type="password">
+        <input autocomplete="off" name="confirmnewpassword" placeholder="Confirm New Password" type="password">
+        <button class="btn btn-primary" type="submit">Change password</button>
+    </form>
+{% endblock %}

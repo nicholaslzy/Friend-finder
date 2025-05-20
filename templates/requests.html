@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Requests
+{% endblock %}
+
+{% block head %}
+    <script>
+        function acceptFriendRequest(button) {
+            var friendIdaccept = button.getAttribute('data-friend-id-accept');
+
+            // Send an AJAX POST request
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/acceptFriendRequest', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // Remove the row from the table
+                        var row = button.closest('tr');
+                        row.parentNode.removeChild(row);
+                    } else {
+                        // Handle error
+                        alert('Error accepting friend request');
+                    }
+                }
+            };
+            xhr.send('friend_id_accept=' + encodeURIComponent(friendIdaccept));
+        }
+
+        function declineFriendRequest(button) {
+            var friendIddecline = button.getAttribute('data-friend-id-decline');
+
+            // Send an AJAX POST request
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/declineFriendRequest', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // Remove the row from the table
+                        var row = button.closest('tr');
+                        row.parentNode.removeChild(row);
+                    } else {
+                        // Handle error
+                        alert('Error declining friend request');
+                    }
+                }
+            };
+            xhr.send('friend_id_decline=' + encodeURIComponent(friendIddecline));
+        }
+    </script>
+{% endblock %}
+
+{% block body %}
+{% endblock %}
+
+{% block main %}
+    <h2>Friend requests</h2><br>
+    <table class='container'>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>School</th>
+            <th>Course</th>
+        </tr>
+        {% for user in friend_requests %}
+            {% if user['status'] == 'pending' %}
+                <tr>
+                    <td>{{ user['name'] }}</td>
+                    <td>{{ user['age'] }}</td>
+                    <td>{{ user['gender'] }}</td>
+                    <td>{{ user['school'] }}</td>
+                    <td>{{ user['course'] }}</td>
+                    <td>
+                        <button class="btn btn-primary" data-friend-id-accept="{{ user['user_id'] }}" onclick="acceptFriendRequest(this)" type="button">Accept</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" data-friend-id-decline="{{ user['user_id'] }}" onclick="declineFriendRequest(this)" type="button">Decline</button>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+    <hr>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Info
+{% endblock %}
+
+{% block head %}
+    <style>
+        .form-group {
+            margin-bottom: 1em;
+            text-align: left;
+        }
+
+        label, input, select {
+            display: block;
+            width: 100%;
+            margin-top: 0.5em;
+        }
+
+        input, select {
+            padding: 0.5em;
+            font-size: 1em;
+        }
+
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+    </style>
+{% endblock %}
+
+{% block body %}
+
+{% endblock %}
+
+{% block main %}
+<div class="form-container">
+    <form action="/info" method="post">
+        <div class="form-group">
+            <label for="uname">Username:</label>
+            <input type="text" id="uname" name="username" placeholder="{{ username }}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="{{ user_info['name'] }}">
+        </div>
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" min='16' id="age" name="age" placeholder="{{ user_info['age'] }}">
+        </div>
+        <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender">
+                <option selected value="{{ user_info['gender'] }}" disabled>{{ user_info['gender'] }}</option>
+                <option value="M">M</option>
+                <option value="F">F</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="secondDropdown">School:</label>
+            <select id="secondDropdown" name="school">
+                <option selected value="{{ user_info['school'] }}" disabled>{{ user_info['school'] }}</option>
+                <option value="NUS">NUS</option>
+                <option value="NTU">NTU</option>
+                <option value="SMU">SMU</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="course">Course:</label>
+            <input type="text" id="course" name="course" placeholder="{{ user_info['course'] }}">
+        </div>
+        <button class="btn btn-primary" type="submit">Update info</button>
+    </form>
+</div>
+<br><br><br>
+<p>Please fill in all fields to update information accordingly.</p>
+{% endblock %}
+

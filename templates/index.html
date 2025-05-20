@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Homepage
+{% endblock %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+
+{% endblock %}
+
+{% block main %}
+    <h2>Friend list</h2><br>
+    <table class='container'>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>School</th>
+            <th>Course</th>
+        </tr>
+        {% for user in friends %}
+            <tr>
+                <td>{{ user['name'] }}</td>
+                <td>{{ user['age'] }}</td>
+                <td>{{ user['gender'] }}</td>
+                <td>{{ user['school'] }}</td>
+                <td>{{ user['course'] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <hr>
+{% endblock %}
