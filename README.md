@@ -12,7 +12,7 @@ allow for the 'Add Friend' as well as 'Accept' and 'Decline' buttons.
 ## Getting Started  
 1. Clone or download the repository 
 ```bash
-git clone <repository-url>
+git clone <https://github.com/nicholaslzy/Friend-finder.git>
 cd finalproject
 ```
 
